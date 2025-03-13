@@ -2,6 +2,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static java.util.Collections.swap;
+
 /**
  *  The MinPQ class represents a priority queue of generic keys.
  *  It supports the usual insert and delete-the-minimum
@@ -153,10 +155,21 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void swim(int k) {
         //STUDENT TODO
-    }
+        while (k > 1 && greater(k / 2, k)) {
+            exch(k, k / 2);
+            k = k / 2;
+        }
 
     private void sink(int k) {
         //STUDENT TODO
+            while (2 * k <= n) {
+                int j = 2 * k;
+                if (j < n && greater(j, j + 1)) j++;
+                if (!greater(k, j)) break;
+                exch(k, j);
+                k = j;
+            }
+
     }
 
    /***************************************************************************
